@@ -6,17 +6,17 @@ public class Movement : MonoBehaviour
 {
     public float mainThrust=100f;
     public float rotatePower=1f;
+    public AudioClip mainEngine;
   
     Rigidbody rb;
     AudioSource audioSource;
-    // Start is called before the first frame update
+    
     void Start()
     {
         rb= GetComponent<Rigidbody>();
         audioSource= GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
        ThrustProcess();
@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
        
             if(!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             } 
        }
        else
