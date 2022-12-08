@@ -24,8 +24,8 @@ public class CollisionHandler : MonoBehaviour
     {
             movementSc= GetComponent<Movement>();
             audioSource= GetComponent<AudioSource>();
-            crashParticles = GameObject.Find("Explosion Particles").GetComponent<ParticleSystem>();
-            finishParticles = GameObject.Find("Success Particles").GetComponent<ParticleSystem>();
+            //crashParticles = GameObject.Find("Explosion Particles").GetComponent<ParticleSystem>();
+            //finishParticles = GameObject.Find("Success Particles").GetComponent<ParticleSystem>();
     }
     void OnCollisionEnter(Collision other)
     {
