@@ -2,6 +2,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.ParticleSystem;
 
 public class CollisionHandler : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class CollisionHandler : MonoBehaviour
 
     public AudioClip crashSound;
     public AudioClip finishSound;
+
+    public ParticleSystem finishParticles;
+    public ParticleSystem crashParticles;
 
     Movement movementSc;
     AudioSource audioSource;    
@@ -20,6 +24,8 @@ public class CollisionHandler : MonoBehaviour
     {
             movementSc= GetComponent<Movement>();
             audioSource= GetComponent<AudioSource>();
+            crashParticles = GameObject.Find("Explosion Particles").GetComponent<ParticleSystem>();
+            finishParticles = GameObject.Find("Success Particles").GetComponent<ParticleSystem>();
     }
     void OnCollisionEnter(Collision other)
     {
@@ -36,12 +42,10 @@ public class CollisionHandler : MonoBehaviour
                 StartSuccesSequence();
                 break;
             case "Fuel":
-            case "obstacle":
-                    PlayCrushSound();
-                StartCrashSequence();
                 break;
             default:
-              
+                PlayCrushSound();
+                StartCrashSequence();
                 break;
         }
 
@@ -51,6 +55,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning= true;
        // audioSource.Stop();
         movementSc.enabled = false;
+        crashParticles.Play();
         Invoke("ReloadLevel", delayForRestart);
     }
     void StartSuccesSequence()
@@ -58,6 +63,7 @@ public class CollisionHandler : MonoBehaviour
         isTransitioning= true;
         //audioSource.Stop();
         movementSc.enabled = false;
+        finishParticles.Play();
         Invoke("OpenNextLevel", delayForNextLevel);
     }
     public void OpenNextLevel()
@@ -90,4 +96,5 @@ public class CollisionHandler : MonoBehaviour
         
         audioSource.PlayOneShot(finishSound);
     }
+  
 }
