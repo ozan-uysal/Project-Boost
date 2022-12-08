@@ -62,11 +62,7 @@ public class Movement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotatePower);
-            if (!rightThrusterParticles.isPlaying)
-            {
-                rightThrusterParticles.Play();
-            }
+            RotateLeft();
         }
         else
         {
@@ -74,11 +70,7 @@ public class Movement : MonoBehaviour
         }     
         if(Input.GetKey(KeyCode.D))
         {
-             ApplyRotation(-rotatePower);
-            if (!leftThrusterParticles.isPlaying)
-            {
-                leftThrusterParticles.Play();
-            }
+            RotateRight();
         }
         else
         {
@@ -86,6 +78,25 @@ public class Movement : MonoBehaviour
             leftThrusterParticles.Stop();   
         }
     }
+    private void RotateLeft()
+    {
+        ApplyRotation(rotatePower);
+        if (!rightThrusterParticles.isPlaying)
+        {
+            rightThrusterParticles.Play();
+        }
+    }
+
+    private void RotateRight()
+    {
+        ApplyRotation(-rotatePower);
+        if (!leftThrusterParticles.isPlaying)
+        {
+            leftThrusterParticles.Play();
+        }
+    }
+
+   
 
     private void ApplyRotation(float rotationThisFrame)
     {
