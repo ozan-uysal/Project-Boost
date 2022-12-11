@@ -19,6 +19,7 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audioSource;    
 
     bool isTransitioning=false;
+    bool collisionDisabled=false;
    
     private void Start()
     {
@@ -29,7 +30,7 @@ public class CollisionHandler : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        if (isTransitioning)
+        if (isTransitioning || collisionDisabled)
         {
             return;
         }
@@ -46,9 +47,14 @@ public class CollisionHandler : MonoBehaviour
             default:
                 PlayCrushSound();
                 StartCrashSequence();
+              
                 break;
         }
 
+    }
+     void Update()
+    {
+        RespondToDebugKeys();
     }
     void StartCrashSequence()
     {
@@ -77,6 +83,18 @@ public class CollisionHandler : MonoBehaviour
         }
        
         SceneManager.LoadScene(nextSceneIndex);
+      
+    }
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKey(KeyCode.L))
+        {
+           OpenNextLevel();
+        }
+        else if (Input.GetKey(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
     }
     public void ReloadLevel()
     {
@@ -96,5 +114,6 @@ public class CollisionHandler : MonoBehaviour
         
         audioSource.PlayOneShot(finishSound);
     }
-  
+
+   
 }
