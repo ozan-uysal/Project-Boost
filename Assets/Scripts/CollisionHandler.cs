@@ -47,7 +47,6 @@ public class CollisionHandler : MonoBehaviour
             default:
                 PlayCrushSound();
                 StartCrashSequence();
-              
                 break;
         }
 

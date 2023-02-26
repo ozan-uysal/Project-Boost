@@ -8,10 +8,12 @@ public class Oscillator : MonoBehaviour
     public Vector3 movementVector;
     public float  movementFactor;
     public float period = 5f;
+    
     // Start is called before the first frame update
     void Start()
     {
         startingPosition= transform.position;
+       
     }
 
     // Update is called once per frame
@@ -30,5 +32,7 @@ public class Oscillator : MonoBehaviour
 
         Vector3 offset = movementVector * movementFactor;
         transform.position = startingPosition + offset;
+        
     }   
 }
+    
