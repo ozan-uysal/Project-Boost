@@ -101,18 +101,12 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(currentSceneIndex);
     }
     void PlayCrushSound()
-    {
-        
+    { 
             audioSource.PlayOneShot(crashSound);
-        
     }
        
     void PlayFinishSound()
-    {
-        
-        
+    { 
         audioSource.PlayOneShot(finishSound);
     }
-
-   
 }
